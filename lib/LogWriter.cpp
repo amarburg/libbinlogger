@@ -1,6 +1,6 @@
 
 
-#include "LogWriter.h"
+#include "logger/LogWriter.h"
 
 #ifdef USE_SNAPPY
 #include <snappy.h>

@@ -1,9 +1,12 @@
 
 
 IF( DEFINED LOCAL_LIBACTIVE_OBJECT )
+	message("Building local copy of LibActiveObject")
+
 	set( LIBACTIVE_OBJECT_DIR ${LOCAL_LIBACTIVE_OBJECT} )
 
 	include_directories( ${LIBACTIVE_OBJECT_DIR}/include )
+
 	add_subdirectory( ${LOCAL_LIBACTIVE_OBJECT}/lib libactive_object )
 ELSE()
 
@@ -43,4 +46,4 @@ ELSE()
 
 ENDIF()
 
-set( LIBACTIVE_OBJECT_INCLUDE_DIRECTORIES ${LIBACTIVE_OBJECT_DIR}/include )
+set( LIBACTIVE_OBJECT_INCLUDE_DIRS ${LIBACTIVE_OBJECT_DIR}/include )

@@ -9,7 +9,7 @@
 // TODO:   Currently single threaded.  Uncompression could be parallelized
 // in manner similar to LogWriter...
 
-#include "LogReader.h"
+#include "logger/LogReader.h"
 
 #ifdef USE_SNAPPY
 #include <snappy.h>
