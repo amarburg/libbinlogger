@@ -6,7 +6,11 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 set(RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-# find_package(Boost COMPONENTS thread filesystem system REQUIRED)
+set( OPENCV_VERSION 2.4 )
+list(APPEND OPENCV_COMPONENTS core highgui imgproc video)
+find_package(OpenCV ${OPENCV_VERSION} COMPONENTS ${OPENCV_COMPONENTS} REQUIRED)
+
+find_package(Boost COMPONENTS thread filesystem system REQUIRED)
 # find_package(Eigen3 REQUIRED)
 
 find_package(TCLAP REQUIRED )
@@ -42,12 +46,17 @@ endif()
 ## Set global include paths
 set( LIBLOGGER_INCLUDE_DIRECTORIES
   ${CMAKE_SOURCE_DIR}/lib
+	${LIBACTIVE_OBJECT_INCLUDE_DIRECTORIES}
 	${G3LOG_INCLUDE_DIR}
 )
   # ${EIGEN3_INCLUDE_DIR}
   # ${OpenCV_INCLUDE_DIRS}
   # ${Boost_INCLUDE_DIR}
 #)
+
+include( ${PROJECT_SOURCE_DIR}/cmake/BuildLibActiveObject.cmake )
+
+message( ${LIBLOGGER_INCLUDE_DIRECTORIES})
 include_directories( ${LIBLOGGER_INCLUDE_DIRECTORIES} )
 
 
