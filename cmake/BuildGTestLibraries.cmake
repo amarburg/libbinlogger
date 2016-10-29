@@ -26,4 +26,7 @@ set( GTEST_LIBRARY_DIR ${CMAKE_BINARY_DIR}/gtest/lib )
 link_directories( ${GTEST_LIBRARY_DIR} )
 # set( GTEST_BOTH_LIBRARIES gtest gtest_main )
 
+list( APPEND EXTERNAL_PROJECTS gtest )
+
+
 set_target_properties(gtest PROPERTIES EXCLUDE_FROM_ALL TRUE)

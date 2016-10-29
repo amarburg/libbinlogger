@@ -16,9 +16,9 @@ find_package(Boost COMPONENTS thread filesystem system REQUIRED)
 find_package(TCLAP REQUIRED )
 find_package(ZLIB REQUIRED)
 
+set( EXTERNAL_PROJECTS )
 include( ${PROJECT_SOURCE_DIR}/cmake/BuildG3Log.cmake )
 
-set( EXTERNAL_PROJECTS g3log )
 ## Command used to build the external projects
 set( EXTERNAL_PROJECT_PARALLELISM 4 CACHE STRING "Level of parallelism when making ExternalProjects" )
 set( EXTERNAL_PROJECT_MAKE_COMMAND "make" )
@@ -32,7 +32,6 @@ endif()
 option( USE_GOOGLE_SNAPPY "Use Google Snappy" ON )
 if( USE_GOOGLE_SNAPPY )
 	include( ${PROJECT_SOURCE_DIR}/cmake/BuildGoogleSnappy.cmake )
-	list( APPEND EXTERNAL_PROJECTS snappy )
 endif()
 
 ## C++ flags applied to all builds
@@ -43,24 +42,15 @@ if(APPLE)
 	set( CMAKE_MACOSX_RPATH OFF )
 endif()
 
+include( ${PROJECT_SOURCE_DIR}/cmake/BuildLibActiveObject.cmake )
+
 ## Set global include paths
 set( LIBLOGGER_INCLUDE_DIRS
   ${CMAKE_SOURCE_DIR}/include
 	${LIBACTIVE_OBJECT_INCLUDE_DIRS}
 	${G3LOG_INCLUDE_DIR}
 )
-  # ${EIGEN3_INCLUDE_DIR}
-  # ${OpenCV_INCLUDE_DIRS}
-  # ${Boost_INCLUDE_DIR}
-#)
-
-include( ${PROJECT_SOURCE_DIR}/cmake/BuildLibActiveObject.cmake )
-
-message( ${LIBLOGGER_INCLUDE_DIRS})
 include_directories( ${LIBLOGGER_INCLUDE_DIRS} )
-
-
-
 add_subdirectory("lib/")
 
 #add_subdirectory("tools")
@@ -69,7 +59,6 @@ option( BUILD_UNIT_TESTS "Build unit tests" ON )
 if( BUILD_UNIT_TESTS )
   ## Build a local copy of gtest (as per the GTest FAQ)
   include( ${CMAKE_SOURCE_DIR}/cmake/BuildGTestLibraries.cmake )
-	list( APPEND EXTERNAL_PROJECTS gtest )
 
   add_subdirectory( test/unit/ )
 endif()

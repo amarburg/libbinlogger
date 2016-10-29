@@ -25,5 +25,5 @@ target_link_libraries(logger
   ${G3LOG_LIB}
   ${SNAPPY_LIBRARIES}
 	${ZLIB_LIBRARIES}
-  active_object
+  ${LIBACTIVE_OBJECTS_LIBS}
 )

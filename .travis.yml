@@ -1,5 +1,4 @@
 language: cpp
-cache: ccache
 
 notifications:
   email:
@@ -9,7 +8,7 @@ notifications:
 matrix:
   env:
     - BUILD_TYPE=release
-#    - BUILD_TYPE=Debug
+    - BUILD_DIR=build_ci
   include:
     - os: linux
       dist: trusty
@@ -19,16 +18,7 @@ matrix:
 
 ## Install OSX deps using a script
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx"   ]]; then .travis/install_deps_osx.sh        ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then .travis/install_deps_trusty.sh     ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install rake ; fi
+  - rake dependencies:$TRAVIS_OS_NAME
 
-script: .travis/build.sh
-
-## Try caching these ExternalProjects.   I believe the CMake dependency
-## process will correctly rebuild these if upstream changes.
-cache:
-  directories:
-  - build_ci/g2o
-  - build_ci/g3log
-  - build_ci/google-snappy
-  - build_ci/Pangolin
+script: rake debug:test releae:test

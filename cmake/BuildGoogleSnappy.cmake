@@ -22,4 +22,6 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   set( SNAPPY_LIBRARIES ${SNAPPY_INSTALL_DIR}/lib/libsnappy.so )
 endif()
 
+list( APPEND EXTERNAL_PROJECTS snappy )
+
 set_target_properties(snappy PROPERTIES EXCLUDE_FROM_ALL TRUE)
