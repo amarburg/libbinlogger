@@ -2,7 +2,7 @@
 IF( DEFINED EXISTING_G3LOG )
 	message( "Using existing G3LOG at ${EXISTING_G3LOG}")
 
-	set( G3LOG_INCLUDE_DIR ${EXISTING_G3LOG}/src )
+	set( G3LOG_INCLUDE_DIR ${EXISTING_G3LOG}/src/g3log/src )
 	set( G3LOG_LIB_DIR ${EXISTING_G3LOG}/src/g3log-build/ )
 	set( G3LOG_LIB g3logger )
 	link_directories(
