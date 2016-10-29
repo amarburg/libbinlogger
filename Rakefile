@@ -29,11 +29,12 @@ load 'config.rb' if FileTest::exists? 'config.rb'
 
 namespace :dependencies do
   task :linux do
-    sh "sudo apt-get install -y cmake libtclap-dev libboost-all-dev"
+    sh "sudo apt-get install -y cmake libopencv-dev libtclap-dev libboost-all-dev"
   end
 
   task :osx do
     sh "brew update"
-    sh "brew install cmake"
+    sh "brew tap homebrew/science"
+    sh "brew install cmake homebrew/science/opencv"
   end
 end
