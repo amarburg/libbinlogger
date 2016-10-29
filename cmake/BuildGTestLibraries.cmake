@@ -18,8 +18,8 @@ ExternalProject_Add( gtest
 ExternalProject_Get_Property( gtest INSTALL_DIR )
 
 set( GTEST_INCLUDE_DIRS ${INSTALL_DIR}/include  )
-set( GTEST_LIBRARY libgtest.a  )
-set( GTEST_MAIN_LIBRARY libgtest_main.a  )
+set( GTEST_LIBRARY libgtest.a pthread )
+set( GTEST_MAIN_LIBRARY libgtest_main.a pthread )
 set( GTEST_BOTH_LIBRARIES ${GTEST_LIBRARY} ${GTEST_MAIN_LIBRARY}  )
 
 set( GTEST_LIBRARY_DIR ${CMAKE_BINARY_DIR}/gtest/lib )
