@@ -35,6 +35,8 @@ namespace :dependencies do
   task :osx do
     sh "brew update"
     sh "brew tap homebrew/science"
-    sh "brew install cmake homebrew/science/opencv"
+    # Want to use the pre-installed numpy, not the homebrew version installed as
+    # a dep to OpenCV
+    sh "brew install --ignore-dependencies homebrew/science/opencv eigen ilmbase openexr"
   end
 end
