@@ -1,7 +1,7 @@
 
 task :default => "debug:test"
 
-cmake_opts = ['-D BUILD_UNIT_TESTS:BOOL=True']
+@cmake_opts = ['-D BUILD_UNIT_TESTS:BOOL=True']
 load 'config.rb' if FileTest::exists? 'config.rb'
 
 ['Debug','Release'].each { |build_type|
@@ -11,7 +11,7 @@ load 'config.rb' if FileTest::exists? 'config.rb'
     task :build do
       unless FileTest::directory? build_dir
         FileUtils::mkdir build_dir
-        sh "cd %s && cmake -D CMAKE_BUILD_TYPE:STRING=\"%s\" %s  .." % [build_dir, build_type, cmake_opts.join(' ')]
+        sh "cd %s && cmake -D CMAKE_BUILD_TYPE:STRING=\"%s\" %s  .." % [build_dir, build_type, @cmake_opts.join(' ')]
       end
 
       if !FileTest::exists? build_dir + "/g3log/src/g3log-build/libg3logger.a"
