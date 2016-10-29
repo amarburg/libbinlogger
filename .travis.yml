@@ -7,8 +7,6 @@ notifications:
 # Per-OS configuration
 matrix:
   env:
-    - BUILD_TYPE=release
-    - BUILD_DIR=build_ci
   include:
     - os: linux
       dist: trusty

@@ -29,7 +29,7 @@ load 'config.rb' if FileTest::exists? 'config.rb'
 
 namespace :dependencies do
   task :linux do
-    sh "sudo apt-get install -y cmake"
+    sh "sudo apt-get install -y cmake libtclap-dev libboost-all-dev"
   end
 
   task :osx do
