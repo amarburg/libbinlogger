@@ -19,4 +19,4 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install rake ; fi
   - rake dependencies:$TRAVIS_OS_NAME
 
-script: rake debug:test releae:test
+script: rake debug:test release:test
