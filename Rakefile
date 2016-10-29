@@ -33,10 +33,11 @@ namespace :dependencies do
   end
 
   task :osx do
+    sh "pip uninstall numpy"
     sh "brew update"
     sh "brew tap homebrew/science"
     # Want to use the pre-installed numpy, not the homebrew version installed as
     # a dep to OpenCV
-    sh "brew install --ignore-dependencies homebrew/science/opencv eigen ilmbase openexr"
+    sh "brew install homebrew/science/opencv"
   end
 end
