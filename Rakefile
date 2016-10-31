@@ -36,7 +36,7 @@ namespace :dependencies do
   task :osx do
     sh "brew update"
     sh "brew tap homebrew/science"
-    sh "brew install homebrew/science/opencv"
+    sh "brew install homebrew/science/opencv tclap"
   end
 
   namespace :travis do
