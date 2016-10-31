@@ -33,15 +33,21 @@ namespace :dependencies do
     sh "sudo apt-get install -y cmake libopencv-dev libtclap-dev libboost-all-dev"
   end
 
+  task :osx do
+    sh "brew update"
+    sh "brew tap homebrew/science"
+    sh "brew install homebrew/science/opencv"
+  end
+
   namespace :travis do
 
     task :linux => "dependencies:trusty"
 
-    task :osx do
+    task :osx => [:pip_uninstall_numpy, "dependencies:osx"]
+
+    task :pip_uninstall_numpy do
       sh "pip uninstall -y numpy"
-      sh "brew update"
-      sh "brew tap homebrew/science"
-      sh "brew install homebrew/science/opencv"
     end
+
   end
 end
