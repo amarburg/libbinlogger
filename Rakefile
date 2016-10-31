@@ -28,16 +28,20 @@ load 'config.rb' if FileTest::exists? 'config.rb'
 }
 
 namespace :dependencies do
-  task :linux do
+
+  task :trusty do
     sh "sudo apt-get install -y cmake libopencv-dev libtclap-dev libboost-all-dev"
   end
 
-  task :osx do
-    sh "pip uninstall numpy"
-    sh "brew update"
-    sh "brew tap homebrew/science"
-    # Want to use the pre-installed numpy, not the homebrew version installed as
-    # a dep to OpenCV
-    sh "brew install homebrew/science/opencv"
+  namespace :travis do
+
+    task :linux => "dependencies:trusty"
+
+    task :osx do
+      sh "pip uninstall -y numpy"
+      sh "brew update"
+      sh "brew tap homebrew/science"
+      sh "brew install homebrew/science/opencv"
+    end
   end
 end
