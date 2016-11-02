@@ -28,6 +28,15 @@ if( EXTERNAL_PROJECT_PARALLELISM GREATER 0 )
 endif()
 
 
+EXECUTE_PROCESS( COMMAND uname -m COMMAND tr -d '\n' OUTPUT_VARIABLE ARCHITECTURE )
+message( STATUS "Architecture: ${ARCHITECTURE}" )
+if( ${ARCHITECTURE} STREQUAL "aarch64" )
+	# This is needed to work around a problem in Jetpack 2.3 / Cuda 8.0
+	SET( CUDA_USE_STATIC_CUDA_RUNTIME OFF )
+elseif( ${ARCHITECTURE} STREQUAL "x86_64" )
+	#
+endif()
+
 ##====== Support for Google Snappy compression lib ==================
 option( USE_GOOGLE_SNAPPY "Use Google Snappy" ON )
 if( USE_GOOGLE_SNAPPY )
