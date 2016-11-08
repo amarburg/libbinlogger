@@ -22,12 +22,17 @@ load 'config.rb' if FileTest::exists? 'config.rb'
   end
 }
 
-namespace :conan do
-  task :export do
-    sh "rm -rf build-*"
+namespace :conan  do
+  desc "Export as Conan package"
+  task :export => :distclean do
     sh "conan export amarburg/testing"
   end
 end
+
+task :distclean do
+  sh "rm -rf build-*"
+end
+
 
 namespace :dependencies do
 
