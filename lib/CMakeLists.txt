@@ -11,9 +11,7 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/lib
   ${OpenCV_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIR}
-  ${G3LOG_INCLUDE_DIR}
-  ${SNAPPY_INCLUDE_DIRS}
-	${ZLIB_INCLUDE_DIRS}
+  ${CONAN_INCLUDE_DIRS}
 )
 
 # build shared library.
@@ -21,9 +19,5 @@ add_library(logger SHARED ${logger_SOURCE_FILES})
 target_link_libraries(logger
   ${Boost_LIBRARIES}
   ${OpenCV_LIBS}
-  # ${ZED_CAMERA_LIBRARIES}
-  ${G3LOG_LIB}
-  ${SNAPPY_LIBRARIES}
-	${ZLIB_LIBRARIES}
-  ${LIBACTIVE_OBJECTS_LIBS}
+  ${CONAN_LIBS}
 )
