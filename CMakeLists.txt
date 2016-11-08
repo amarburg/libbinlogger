@@ -46,5 +46,3 @@ option( BUILD_UNIT_TESTS "Build unit tests" OFF )
 if( BUILD_UNIT_TESTS )
   add_subdirectory( test/unit/ )
 endif()
-
-add_custom_target( deps DEPENDS ${EXTERNAL_PROJECTS} )
