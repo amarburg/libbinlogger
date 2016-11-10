@@ -11,23 +11,7 @@ list(APPEND OPENCV_COMPONENTS core highgui imgproc video)
 find_package(OpenCV ${OPENCV_VERSION} COMPONENTS ${OPENCV_COMPONENTS} REQUIRED)
 
 find_package(Boost COMPONENTS thread filesystem system REQUIRED)
-# find_package(Eigen3 REQUIRED)
 
-
-EXECUTE_PROCESS( COMMAND uname -m COMMAND tr -d '\n' OUTPUT_VARIABLE ARCHITECTURE )
-message( STATUS "Architecture: ${ARCHITECTURE}" )
-if( ${ARCHITECTURE} STREQUAL "aarch64" )
-	# This is needed to work around a problem in Jetpack 2.3 / Cuda 8.0
-	SET( CUDA_USE_STATIC_CUDA_RUNTIME OFF )
-elseif( ${ARCHITECTURE} STREQUAL "x86_64" )
-	#
-endif()
-
-##====== Support for Google Snappy compression lib ==================
-# option( USE_GOOGLE_SNAPPY "Use Google Snappy" ON )
-# if( USE_GOOGLE_SNAPPY )
-# 	include( ${PROJECT_SOURCE_DIR}/cmake/BuildGoogleSnappy.cmake )
-# endif()
 
 ## C++ flags applied to all builds
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")

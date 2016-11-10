@@ -6,8 +6,8 @@ class LibLoggerConan(ConanFile):
   settings = "os", "compiler", "build_type", "arch"
   generators = "cmake"
   exports = "*"
-  options = {"opencv_dir": "ANY"}
-  default_options = "opencv_dir=''"
+  options = {"opencv_dir": "ANY", "shared": [True,False] }
+  default_options = "opencv_dir=''", "shared=True", "snappy:shared=True", "zlib:shared=True"
   requires = "TCLAP/master@jmmut/testing", \
               "snappy/1.1.3@hoxnox/testing", \
               "zlib/1.2.8@lasote/stable", \
