@@ -2,7 +2,7 @@ from conans import ConanFile, CMake
 
 class LibLoggerConan(ConanFile):
   name = "liblogger"
-  version = "0.1"
+  version = "master"
   settings = "os", "compiler", "build_type", "arch"
   generators = "cmake"
   exports = "*"
