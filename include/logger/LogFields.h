@@ -8,6 +8,7 @@
 
 #include <g3log/g3log.hpp>
 
+#include <opencv2/core.hpp>
 
 namespace logger {
 
