@@ -6,8 +6,9 @@ class LibLoggerConan(ConanFile):
   settings = "os", "compiler", "build_type", "arch"
   generators = "cmake"
   exports = "*"
-  options = {"opencv_dir": "ANY"}
-  default_options = "opencv_dir=''"
+  options = {"opencv_dir": "ANY","shared": [True, False], "build_parallel": [True, False]}
+  default_options = "opencv_dir=''", "shared=True", "build_parallel=True"
+
   requires = "TCLAP/master@jmmut/testing", \
               "snappy/1.1.3@hoxnox/testing", \
               "zlib/1.2.8@lasote/stable", \
@@ -25,12 +26,22 @@ class LibLoggerConan(ConanFile):
 
   def build(self):
     cmake = CMake(self.settings)
+    cmake_opts = ""
+    shared_opts = ""
+    build_opts = ""
+    
     if self.options.opencv_dir:
       cmake_opts = "-DOpenCV_DIR=%s" % (self.options.opencv_dir)
 
+    if self.options.shared:
+      shared_opts = "-DBUILD_SHARED_LIBS=True"
+
+    if self.options.build_parallel:
+      build_opts = "-j"
+
     flag_build_tests = "-DBUILD_UNIT_TESTS=1" if self.scope.dev and self.scope.build_tests else ""
-    self.run('cmake "%s" %s %s %s' % (self.conanfile_directory, cmake.command_line, cmake_opts, flag_build_tests))
-    self.run('cmake --build . %s' % cmake.build_config)
+    self.run('cmake "%s" %s %s %s %s' % (self.conanfile_directory, cmake.command_line, cmake_opts, shared_opts, flag_build_tests))
+    self.run('cmake --build . %s -- %s' % (cmake.build_config, build_opts))
     if self.scope.dev and self.scope.build_tests:
       self.run('make unit_test')
 
