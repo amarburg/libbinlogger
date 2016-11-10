@@ -35,6 +35,10 @@ namespace :conan  do
   task :export => :distclean do
     sh "conan export amarburg/testing"
   end
+
+  task :upload do
+    sh "conan upload liblogger/master@amarburg/testing"
+  end
 end
 
 task :distclean do
@@ -60,7 +64,9 @@ namespace :dependencies do
 
     task :linux => "dependencies:trusty"
 
-    task :osx => [:pip_uninstall_numpy, "dependencies:osx"]
+    task :osx => [:pip_uninstall_numpy, "dependencies:osx"] do
+      sh "sudo ln -s /usr/local/bin/glibtoolize /usr/local/bin/libtoolize"
+    end
 
     task :pip_uninstall_numpy do
       sh "pip uninstall -y numpy"

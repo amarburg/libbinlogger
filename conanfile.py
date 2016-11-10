@@ -12,8 +12,8 @@ class LibLoggerConan(ConanFile):
   requires = "TCLAP/master@jmmut/testing", \
               "snappy/1.1.3@hoxnox/testing", \
               "zlib/1.2.8@lasote/stable", \
-              "libactive_object/0.1@amarburg/testing", \
-              "g3log/0.1@amarburg/testing"
+              "libactive_object/master@amarburg/testing", \
+              "g3log/master@amarburg/testing"
 
   def config(self):
     if self.scope.dev and self.scope.build_tests:

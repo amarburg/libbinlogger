@@ -20,3 +20,9 @@ before_install:
   - rake dependencies:travis:$TRAVIS_OS_NAME
 
 script: rake debug:test release:test
+
+deploy:
+  provider: script
+  script: rake conan:upload
+  on:
+    branch: master
