@@ -21,8 +21,8 @@ before_install:
 
 script: rake debug:test release:test
 
-deploy:
-  provider: script
-  script: rake conan:upload
-  on:
-    branch: master
+# deploy:
+#   provider: script
+#   script: rake conan:upload
+#   on:
+#     branch: master
