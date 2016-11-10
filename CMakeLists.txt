@@ -6,8 +6,15 @@ conan_basic_setup()
 
 find_package(Boost COMPONENTS thread filesystem system REQUIRED)
 
-# Tired of screwing around with this
-set( CUDA_USE_STATIC_CUDA_RUNTIME OFF CACHE BOOL "" FORCE  )
+find_package( CUDA )
+if( CUDA_VERSION )
+	message("Found CUDA version ${CUDA_VERSION}")
+	if(${CUDA_VERSION} VERSION_EQUAL "8.0")
+		message("Disabling CUDA_USE_STATIC_CUDA_RUNTIME")
+		set( CUDA_USE_STATIC_CUDA_RUNTIME OFF CACHE BOOL "" FORCE  )
+	endif()
+  find_package( CUDA )
+endif()
 
 set( OPENCV_VERSION 2.4 )
 set( OPENCV_COMPONENTS core highgui imgproc video)
