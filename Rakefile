@@ -18,7 +18,6 @@ load 'config.rb' if FileTest.readable? 'config.rb'
 
     task :build do
       FileUtils::mkdir build_dir unless FileTest::directory? build_dir
-      sh "conan source ."
       chdir build_dir do
         sh "conan install %s .. --build=%s" % [conan_opts.join(' '), @conan_build]
         sh "conan build .."
