@@ -12,6 +12,13 @@ find_package(OpenCV ${OPENCV_VERSION} COMPONENTS ${OPENCV_COMPONENTS} REQUIRED)
 
 find_package(Boost COMPONENTS thread filesystem system REQUIRED)
 
+## Gets Cuda from OpenCV
+if( CUDA_VERSION )
+	find_package( CUDA REQUIRED ${CUDA_VERSION} )
+	if(${CUDA_VERSION} VERSION_EQUAL "8.0")
+		SET( CUDA_USE_STATIC_CUDA_RUNTIME OFF )
+	endif()
+endif()
 
 ## C++ flags applied to all builds
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
