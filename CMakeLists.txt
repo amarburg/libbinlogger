@@ -4,20 +4,25 @@ project(liblogger)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-## This needs to come before OpenCV
-if( CUDA_VERSION )
-	if(${CUDA_VERSION} VERSION_EQUAL "8.0")
-		message("Disabling CUDA_USE_STATIC_CUDA_RUNTIME")
-		SET( CUDA_USE_STATIC_CUDA_RUNTIME OFF )
-	endif()
+find_package(Boost COMPONENTS thread filesystem system REQUIRED)
 
-	find_package( CUDA REQUIRED ${CUDA_VERSION} )
-endif()
+# Tired of screwing around with this
+set( CUDA_USE_STATIC_CUDA_RUNTIME OFF CACHE BOOL "" FORCE  )
 
 set( OPENCV_VERSION 2.4 )
 set( OPENCV_COMPONENTS core highgui imgproc video)
 find_package(OpenCV ${OPENCV_VERSION} COMPONENTS ${OPENCV_COMPONENTS} REQUIRED)
-find_package(Boost COMPONENTS thread filesystem system REQUIRED)
+
+## OpenCV will look for CUDA if we need it, but if it does,
+## we need to re-run the CMake scripts to disable the static CUDA runtime
+# if( CUDA_VERSION )
+# 	message("Found CUDA version ${CUDA_VERSION}")
+# 	if(${CUDA_VERSION} VERSION_EQUAL "8.0")
+# 		message("Disabling CUDA_USE_STATIC_CUDA_RUNTIME")
+# 	endif()
+#
+# 	find_package( CUDA REQUIRED ${CUDA_VERSION} )
+# endif()
 
 ## C++ flags applied to all builds
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
