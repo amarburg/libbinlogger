@@ -36,7 +36,7 @@ namespace :conan  do
     sh "conan export amarburg/testing"
   end
 
-  task :upload do
+  task :upload => :export do
     sh "conan upload liblogger/master@amarburg/testing"
   end
 end
