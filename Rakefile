@@ -52,7 +52,8 @@ namespace :dependencies do
   task :osx do
     sh "brew update"
     sh "brew tap homebrew/science"
-    sh "brew install homebrew/science/opencv tclap conan"
+    sh "brew install homebrew/science/opencv tclap libtool autoconf"
+    sh "pip install conan"
   end
 
   namespace :travis do
