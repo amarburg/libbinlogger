@@ -30,11 +30,11 @@ class LibLoggerConan(ConanFile):
 
     cmake_opts += "-DOpenCV_DIR=%s " % (self.options.opencv_dir) if self.options.opencv_dir else ""
     cmake_opts += "-DBUILD_SHARED_LIBS=True " if self.options.shared else ""
+    cmake_opts += "-DBUILD_UNIT_TESTS=1" if self.scope.dev and self.scope.build_tests else ""
 
     build_opts = "-j" if self.options.build_parallel else ""
 
-    flag_build_tests = "-DBUILD_UNIT_TESTS=1" if self.scope.dev and self.scope.build_tests else ""
-    self.run('cmake "%s" %s %s %s' % (self.conanfile_directory, cmake.command_line, cmake_opts, flag_build_tests))
+    self.run('cmake "%s" %s %s' % (self.conanfile_directory, cmake.command_line, cmake_opts))
     self.run('cmake --build . %s -- %s' % (cmake.build_config, build_opts))
     if self.scope.dev and self.scope.build_tests:
       self.run('make unit_test')
