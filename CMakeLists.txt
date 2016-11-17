@@ -37,6 +37,7 @@ set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 ## Set global include paths
 set( LIBLOGGER_INCLUDE_DIRS
   ${CMAKE_SOURCE_DIR}/include
+	${OpenCV_INCLUDE_DIRS}
 	${CONAN_INCLUDE_DIRS}
 )
 include_directories( ${LIBLOGGER_INCLUDE_DIRS} )
