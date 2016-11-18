@@ -5,6 +5,9 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 find_package(Boost COMPONENTS thread filesystem system REQUIRED)
+set( ZLIB_ROOT /usr )
+find_package( ZLIB REQUIRED )
+message( "ZLIB at ${ZLIB_LIBRARIES}")
 
 find_package( CUDA )
 if( CUDA_VERSION )
@@ -37,10 +40,18 @@ set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 ## Set global include paths
 set( LIBLOGGER_INCLUDE_DIRS
   ${CMAKE_SOURCE_DIR}/include
+	${ZLIB_INCLUDE_DIRS}
 	${OpenCV_INCLUDE_DIRS}
 	${CONAN_INCLUDE_DIRS}
 )
 include_directories( ${LIBLOGGER_INCLUDE_DIRS} )
+
+set( LIBLOGGER_LIBS
+	${Boost_LIBRARIES}
+	${OpenCV_LIBS}
+	${ZLIB_LIBRARIES}
+	${CONAN_LIBS} )
+
 add_subdirectory("lib/")
 
 #add_subdirectory("tools")

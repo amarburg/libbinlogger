@@ -4,7 +4,7 @@ task :default => "debug:test"
 @conan_opts = { shared: 'True', build_parallel: 'False' }
 @conan_settings = {}
 @conan_scopes = { build_tests: 'True' }
-@conan_build = "outdated"
+@conan_build = "missing"
 load 'config.rb' if FileTest.readable? 'config.rb'
 
 build_root = ENV['BUILD_ROOT'] || "build"
