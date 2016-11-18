@@ -7,11 +7,10 @@ class LibLoggerConan(ConanFile):
   generators = "cmake"
   exports = "*"
   options = {"opencv_dir": "ANY", "shared": [True,False], "build_parallel": [True, False]}
-  default_options = "opencv_dir=''", "shared=True", "snappy:shared=True", "zlib:shared=False", "build_parallel=True"
+  default_options = "opencv_dir=''", "shared=True", "snappy:shared=True", "build_parallel=True"
 
   requires = "TCLAP/master@jmmut/testing", \
               "snappy/1.1.3@hoxnox/testing", \
-              "zlib/1.2.8@lasote/stable", \
               "libactive_object/master@amarburg/testing", \
               "g3log/master@amarburg/testing"
 

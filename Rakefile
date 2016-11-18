@@ -4,7 +4,7 @@ task :default => "debug:test"
 @conan_opts = { shared: 'True', build_parallel: 'False' }
 @conan_settings = {}
 @conan_scopes = { build_tests: 'True' }
-@conan_build = "missing"
+@conan_build = "outdated"
 load 'config.rb' if FileTest.readable? 'config.rb'
 
 build_root = ENV['BUILD_ROOT'] || "build"
@@ -51,14 +51,14 @@ end
 namespace :dependencies do
 
   task :trusty do
-    sh "sudo apt-get install -y cmake libopencv-dev libtclap-dev libboost-all-dev"
+    sh "sudo apt-get install -y cmake libopencv-dev libtclap-dev libboost-all-dev zlib1g-dev"
     sh "pip install conan"
   end
 
   task :osx do
     sh "brew update"
     sh "brew tap homebrew/science"
-    sh "brew install homebrew/science/opencv tclap libtool autoconf"
+    sh "brew install homebrew/science/opencv tclap libtool autoconf zlib"
     sh "pip install conan"
   end
 
