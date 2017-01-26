@@ -20,4 +20,4 @@ build:
       code: |
         conan export amarburg/testing
         conan user -p $CONAN_PASSWORD $CONAN_USERNAME
-        conan upload "*" --confirm
+        conan upload "liblogger*" --confirm
