@@ -37,6 +37,12 @@ find_package(OpenCV ${OPENCV_VERSION} COMPONENTS ${OPENCV_COMPONENTS} REQUIRED)
 ## C++ flags applied to all builds
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
+## Having odd problem under Sierra where /usr/local/ isn't in default search paths...
+if( APPLE )
+  include_directories( /usr/local/include )
+  link_directories( /usr/local/lib )
+endif()
+
 ## Set global include paths
 set( LIBLOGGER_INCLUDE_DIRS
   ${CMAKE_SOURCE_DIR}/include
