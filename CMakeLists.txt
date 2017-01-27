@@ -4,6 +4,7 @@ project(liblogger)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+find_package( Threads )
 find_package(Boost COMPONENTS thread filesystem system REQUIRED)
 set( ZLIB_ROOT /usr )
 find_package( ZLIB REQUIRED )
@@ -53,7 +54,7 @@ set( LIBLOGGER_INCLUDE_DIRS
 include_directories( ${LIBLOGGER_INCLUDE_DIRS} )
 
 set( LIBLOGGER_LIBS
-	pthread
+	${CMAKE_THREAD_LIBS_INIT}
 	${Boost_LIBRARIES}
 	${OpenCV_LIBS}
 	${ZLIB_LIBRARIES}
