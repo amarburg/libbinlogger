@@ -53,6 +53,7 @@ set( LIBLOGGER_INCLUDE_DIRS
 include_directories( ${LIBLOGGER_INCLUDE_DIRS} )
 
 set( LIBLOGGER_LIBS
+	pthread
 	${Boost_LIBRARIES}
 	${OpenCV_LIBS}
 	${ZLIB_LIBRARIES}
