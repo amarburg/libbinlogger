@@ -7,16 +7,19 @@
 
 #pragma once
 
+#include <string>
+
 #include <cassert>
 #include <zlib.h>
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
-#include <string>
 
 #include "LogFields.h"
 
 namespace logger {
+
+	using std::string;
 
 class LogReader
 {
@@ -24,10 +27,10 @@ class LogReader
         LogReader(void);
         virtual ~LogReader();
 
-        bool open( const std::string &file );
+        bool open( const string &file );
         bool close( void );
 
-        FieldHandle_t findField( const std::string &field );
+        FieldHandle_t findField( const string &field );
 
         bool grab();
 
