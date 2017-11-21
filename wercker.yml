@@ -7,5 +7,9 @@ build:
       name: Build
       code: |
           ./fips set config linux-make-unittest
-          ./fips build
+          ./fips gen
+          echo "~~~~"
+          ls -l /pipeline/libactive_object
+          echo "~~~~"
+          VERBOSE=1 ./fips build
           ./fips run loggerTest

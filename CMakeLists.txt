@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.5)
 get_filename_component(FIPS_ROOT_DIR "../fips" ABSOLUTE)
 include("${FIPS_ROOT_DIR}/cmake/fips.cmake")
 
-set(FIPS_EXCEPTIONS ON)
 fips_setup(PROJECT liblogger)
 
 find_package(Boost COMPONENTS thread filesystem system REQUIRED)
@@ -57,9 +56,10 @@ set( LIBLOGGER_LIBS
 
 fips_add_subdirectory("lib/")
 
-#add_subdirectory("tools")
+if( FIPS_UNITTESTS )
+  fips_add_subdirectory( test/unit/ )
 
-#option( BUILD_UNIT_TESTS "Build unit tests" OFF )
-#if( BUILD_UNIT_TESTS )
-fips_add_subdirectory("test/unit/")
-#endif()
+  if( FIPS_UNITTESTS_RUN_AFTER_BUILD )
+    ## TODO
+  endif()
+endif()
