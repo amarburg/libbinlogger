@@ -1,0 +1,7 @@
+imports:
+    fips-googletest:
+        git: https://github.com/amarburg/fips-googletest.git
+    libactive_object:
+        git: https://github.com/amarburg/libactive_object.git
+    fips-g3log:
+        git: https://github.com/amarburg/fips-g3log

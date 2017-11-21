@@ -6,7 +6,11 @@ set(logger_SOURCE_FILES
 )
 
 # build shared library.
-add_library(logger SHARED ${logger_SOURCE_FILES})
-target_link_libraries(logger
-  ${LIBLOGGER_LIBS}
-)
+fips_begin_module(logger)
+  fips_files(
+    LogReader.cpp
+    LogWriter.cpp
+  )
+  fips_libs(${Boost_LIBRARIES} )
+  fips_deps( g3log active_object )
+fips_end_module()
