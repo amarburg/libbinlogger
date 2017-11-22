@@ -1,3 +1,4 @@
+find_package(Boost COMPONENTS thread filesystem system REQUIRED)
 
 # Set source files
 set(logger_SOURCE_FILES
@@ -11,6 +12,6 @@ fips_begin_module(logger)
     LogReader.cpp
     LogWriter.cpp
   )
-  fips_libs(${Boost_LIBRARIES} )
+  fips_libs( ${Boost_LIBRARIES} ${ZLIB_LIBRARIES})
   fips_deps( g3log active_object )
 fips_end_module()

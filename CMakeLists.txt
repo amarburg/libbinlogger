@@ -6,8 +6,8 @@ fips_setup(PROJECT liblogger)
 
 find_package(Boost COMPONENTS thread filesystem system REQUIRED)
 
-# set( ZLIB_ROOT /usr )
-# find_package( ZLIB REQUIRED )
+#set( ZLIB_ROOT /usr )
+find_package( ZLIB REQUIRED )
 # message( "ZLIB at ${ZLIB_LIBRARIES}")
 
 # find_package( CUDA )
@@ -51,8 +51,7 @@ set( LIBLOGGER_INCLUDE_DIRS
 )
 include_directories( ${LIBLOGGER_INCLUDE_DIRS} )
 
-set( LIBLOGGER_LIBS
- )
+set( LIBLOGGER_LIBS )
 
 fips_add_subdirectory("lib/")
 

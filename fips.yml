@@ -6,3 +6,9 @@ imports:
         branch: fips
     fips-g3log:
         git: https://github.com/amarburg/fips-g3log
+
+exports:
+  header-dirs:
+    - include/
+  modules:
+    logger: lib/
