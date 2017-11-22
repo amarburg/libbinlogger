@@ -11,4 +11,4 @@ exports:
   header-dirs:
     - include/
   modules:
-    logger: lib/
+    logger: .

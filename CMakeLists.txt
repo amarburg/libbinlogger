@@ -1,8 +1,10 @@
-cmake_minimum_required(VERSION 3.5)
-get_filename_component(FIPS_ROOT_DIR "../fips" ABSOLUTE)
-include("${FIPS_ROOT_DIR}/cmake/fips.cmake")
+if( NOT FIPS_IMPORT)
+  cmake_minimum_required(VERSION 3.5)
+  get_filename_component(FIPS_ROOT_DIR "../fips" ABSOLUTE)
+  include("${FIPS_ROOT_DIR}/cmake/fips.cmake")
 
-fips_setup(PROJECT liblogger)
+  fips_setup(PROJECT liblogger)
+endif()
 
 find_package(Boost COMPONENTS thread filesystem system REQUIRED)
 
@@ -61,4 +63,8 @@ if( FIPS_UNITTESTS )
   if( FIPS_UNITTESTS_RUN_AFTER_BUILD )
     ## TODO
   endif()
+endif()
+
+if( NOT FIPS_IMPORT )
+  fips_finish()
 endif()
