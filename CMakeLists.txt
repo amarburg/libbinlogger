@@ -22,9 +22,16 @@ find_package( ZLIB REQUIRED )
 #   find_package( CUDA )
 # endif()
 
-set( OPENCV_VERSION 2.4 )
 set( OPENCV_COMPONENTS core highgui imgproc video)
-find_package(OpenCV ${OPENCV_VERSION} COMPONENTS ${OPENCV_COMPONENTS} REQUIRED)
+find_package(OpenCV COMPONENTS ${OPENCV_COMPONENTS} REQUIRED)
+
+if( OpenCV_VERSION_MAJOR EQUAL "3" )
+  message( STATUS "Using OpenCV 3.x")
+  add_definitions( -DOPENCV3 )
+else()
+  message( STATUS "Using OpenCV 2.x")
+  add_definitions( -DOPENCV2 )
+endif()
 
 
 ## OpenCV will look for CUDA if we need it, but if it does,
@@ -49,11 +56,12 @@ set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 ## Set global include paths
 set( LIBLOGGER_INCLUDE_DIRS
+  ${OpenCV_INCLUDE_DIRS}
   ${CMAKE_SOURCE_DIR}/include
 )
-include_directories( ${LIBLOGGER_INCLUDE_DIRS} )
+fips_include_directories( ${LIBLOGGER_INCLUDE_DIRS} )
 
-set( LIBLOGGER_LIBS )
+set( LIBLOGGER_LIBS  ${OpenCV_LIBS} )
 
 fips_add_subdirectory("lib/")
 

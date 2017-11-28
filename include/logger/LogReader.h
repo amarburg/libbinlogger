@@ -12,7 +12,13 @@
 #include <cassert>
 #include <zlib.h>
 #include <iostream>
-#include <opencv2/opencv.hpp>
+
+#ifdef OPENCV3
+	#include <opencv2/core.hpp>
+#else
+	#include <opencv2/opencv.hpp>
+#endif
+
 #include <stdio.h>
 
 #include "LogFields.h"
