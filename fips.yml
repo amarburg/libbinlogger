@@ -12,3 +12,7 @@ exports:
     - include/
   modules:
     logger: .
+
+defines:
+  FIPS_RTTI: ON
+  FIPS_EXCEPTIONS: ON
