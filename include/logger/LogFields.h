@@ -75,11 +75,11 @@ struct Chunk {
 	Chunk() = delete;
 
 	Chunk( unsigned long _sz )
-		: size(_sz), _capacity( _sz ), data( new char[_capacity] )
+		: _capacity( _sz ), size(_sz), data( new char[_capacity] )
 	{ memset( data.get(), 0, size );}
 
 	Chunk( const void *_data, unsigned long _sz )
-		: size(_sz), _capacity( _sz ), data( new char[_capacity] )
+		: _capacity( _sz ), size(_sz), data( new char[_capacity] )
 	{ memcpy( data.get(), _data, size );}
 
 	unsigned int set( void *_data, unsigned int _sz )
