@@ -163,7 +163,7 @@ bool LogReader::grab()
 
 cv::Mat LogReader::retrieve( FieldHandle_t handle )
 {
-  CHECK( handle >= 0 && handle < _fields.size() );
+  CHECK( handle >= 0 && handle < (int)_fields.size() );
 
 
   return cv::Mat( _fields[handle].size, _fields[handle].cvType(), (void *)_data[handle].data.get() );

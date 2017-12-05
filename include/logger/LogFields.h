@@ -68,7 +68,7 @@ struct Field {
 
 };
 typedef std::vector<Field> Fields;
-typedef Fields::size_type FieldHandle_t;
+typedef int FieldHandle_t;
 
 
 struct Chunk {

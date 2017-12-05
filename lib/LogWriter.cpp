@@ -109,7 +109,7 @@ int LogWriter::newFrame( void )
 
 void LogWriter::addField( FieldHandle_t handle, const void *data )
 {
-	CHECK( handle >= 0 && handle < _fields.size() );
+	CHECK( handle >= 0 && handle < (int)_fields.size() );
 
 	{
 		std::lock_guard< std::mutex > lock( _compressorMutex[handle] );
