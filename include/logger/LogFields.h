@@ -25,8 +25,6 @@ enum FieldType_t {
 	FIELD_DEPTH_32F = 1
 };
 
-typedef int FieldHandle_t;
-
 struct Field {
 	Field( const std::string &nm, const cv::Size &sz, FieldType_t tp )
 		: name(nm), size(sz), type(tp)
@@ -70,6 +68,8 @@ struct Field {
 
 };
 typedef std::vector<Field> Fields;
+typedef Fields::size_type FieldHandle_t;
+
 
 struct Chunk {
 	Chunk() = delete;

@@ -24,39 +24,19 @@ namespace fs = boost::filesystem;
 namespace logger {
 
 LogReader::LogReader( void )
-  : currentFrame( 0 ),
-    numFrames( 0 )
+  : numFrames( 0 ),
+    currentFrame( 0 )
 {
-    // CHECK(fs::exists(file.c_str()));
-    //
-    // fp = fopen(file.c_str(), "rb");
-    //
-    // currentFrame = 0;
-    //
-    // assert(fread(&numFrames, sizeof(int32_t), 1, fp));
-    //
-    // depthReadBuffer = new unsigned char[numPixels * 2];
-    // imageReadBuffer = new unsigned char[numPixels * 3];
 }
 
 LogReader::~LogReader()
 {
   close();
-
-    // delete [] depthReadBuffer;
-    // delete [] imageReadBuffer;
-    //
-    // if(deCompImage != 0)
-    // {
-    //     cvReleaseImage(&deCompImage);
-    // }
-    //
-    // fclose(fp);
 }
 
 FieldHandle_t LogReader::findField( const std::string &field )
 {
-  for( unsigned int i = 0; i < _fields.size(); ++i ) {
+  for( Fields::size_type i = 0; i < _fields.size(); ++i ) {
     if( field == _fields[i].name ) return i;
   }
 
@@ -99,7 +79,7 @@ bool LogReader::open( const std::string &filename )
   CHECK( numFields > 0 && numFields < 5 ) << "Don't believe the number of fields: " << numFields;
 
   _fields.clear();
-	for( unsigned int i = 0; i < numFields; ++i ) {
+	for( int32_t i = 0; i < numFields; ++i ) {
 		int32_t h, w, type, len;
     char buf[80];
 
@@ -108,7 +88,7 @@ bool LogReader::open( const std::string &filename )
 		CHECK(fread(&type, sizeof(int32_t), 1, fp) == 1);
 		CHECK(fread(&len, sizeof(int32_t), 1, fp) == 1);
     len = std::min(len,80);
-		CHECK(fread(buf, sizeof(std::string::value_type), len, fp) == len);
+		CHECK(fread(buf, sizeof(std::string::value_type), len, fp) == (size_t)len);
 
     LOG(DEBUG) << "Field " << i << " is " << h << " x " << w << "; type " << type << "  name \"" << std::string(buf,len) << "\"";
 
@@ -138,7 +118,7 @@ bool LogReader::grab()
 {
   currentFrame++;
 
-  for( unsigned int i = 0; i < _fields.size(); ++i ) {
+  for( Fields::size_type i = 0; i < _fields.size(); ++i ) {
     CHECK( fp != NULL );
     CHECK( ferror( fp ) == 0 ) << "Error reading stream: " << ferror( fp );
 
@@ -151,7 +131,7 @@ bool LogReader::grab()
   }
 
   // Now decompress the data
-  for( unsigned int i = 0; i < _fields.size(); ++i ) {
+  for( Fields::size_type i = 0; i < _fields.size(); ++i ) {
     uLongf destLen = _data[i].size;
 
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
@@ -179,63 +159,6 @@ bool LogReader::grab()
   }
 
   return true;
-
-//     assert(fread(&timestamp, sizeof(int64_t), 1, fp));
-//
-//     assert(fread(&depthSize, sizeof(int32_t), 1, fp));
-//     assert(fread(&imageSize, sizeof(int32_t), 1, fp));
-//
-//     assert(fread(depthReadBuffer, depthSize, 1, fp));
-//
-
-//
-//     unsigned short * depthBuffer = (unsigned short *)&decompressionBuffer[0];
-//     unsigned short maxVal = 0;
-//     unsigned short minVal = std::numeric_limits<unsigned short>::max();
-//
-//     #pragma omp parallel for reduction(max : maxVal) reduction(min : minVal)
-//     for(int i = 0; i < numPixels; i++)
-//     {
-//         if(depthBuffer[i] > maxVal)
-//         {
-//             maxVal = depthBuffer[i];
-//         }
-//
-//         if(depthBuffer[i] < minVal && depthBuffer[i] != 0)
-//         {
-//             minVal = depthBuffer[i];
-//         }
-//     }
-//
-//     this->maxVal = maxVal;
-//     this->minVal = minVal;
-//
-//     if(deCompImage != 0)
-//     {
-//         cvReleaseImage(&deCompImage);
-//     }
-//
-//     CvMat tempMat = cvMat(1, imageSize, CV_8UC1, (void *)imageReadBuffer);
-//
-//     if(imageSize == numPixels * 3)
-//     {
-//         deCompImage = cvCreateImage(cvSize(width, height), IPL_DEPTH_8U, 3);
-//
-//         memcpy(deCompImage->imageData, imageReadBuffer, numPixels * 3);
-//     }
-//     else if(imageSize > 0)
-//     {
-//         deCompImage = cvDecodeImage(&tempMat);
-//     }
-//     else
-//     {
-//         deCompImage = cvCreateImage(cvSize(width, height), IPL_DEPTH_8U, 3);
-//         memset(deCompImage->imageData, 0, numPixels * 3);
-//     }
-//
-//     depth = (unsigned short *)decompressionBuffer;
-//     rgb = (unsigned char *)deCompImage->imageData;
-//
 }
 
 cv::Mat LogReader::retrieve( FieldHandle_t handle )
@@ -247,14 +170,4 @@ cv::Mat LogReader::retrieve( FieldHandle_t handle )
 }
 
 
-// bool LogReader::hasMore()
-// {
-//     return currentFrame + 1 < numFrames;
-// }
-//
-// const std::string LogReader::getFile()
-// {
-//     return file;
-// }
-
- }
+}
