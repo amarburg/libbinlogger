@@ -61,7 +61,7 @@ set( LIBLOGGER_INCLUDE_DIRS
 )
 fips_include_directories( ${LIBLOGGER_INCLUDE_DIRS} )
 
-set( LIBLOGGER_LIBS  ${OpenCV_LIBS} )
+#set( LIBLOGGER_LIBS  ${OpenCV_LIBS} )
 
 fips_add_subdirectory("lib/")
 

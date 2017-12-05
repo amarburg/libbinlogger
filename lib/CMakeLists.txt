@@ -12,6 +12,6 @@ fips_begin_module(logger)
     LogReader.cpp
     LogWriter.cpp
   )
-  fips_libs( ${Boost_LIBRARIES} ${ZLIB_LIBRARIES})
+  fips_libs( ${Boost_LIBRARIES} ${ZLIB_LIBRARIES} ${OpenCV_LIBS})
   fips_deps( g3log active_object )
 fips_end_module()
