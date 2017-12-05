@@ -33,17 +33,16 @@ else()
   add_definitions( -DOPENCV2 )
 endif()
 
-
 ## OpenCV will look for CUDA if we need it, but if it does,
 ## we need to re-run the CMake scripts to disable the static CUDA runtime
-# if( CUDA_VERSION )
-# 	message("Found CUDA version ${CUDA_VERSION}")
-# 	if(${CUDA_VERSION} VERSION_EQUAL "8.0")
-# 		message("Disabling CUDA_USE_STATIC_CUDA_RUNTIME")
-# 	endif()
-#
-# 	find_package( CUDA REQUIRED ${CUDA_VERSION} )
-# endif()
+if( CUDA_VERSION )
+	message("Found CUDA version ${CUDA_VERSION}")
+	if(${CUDA_VERSION} VERSION_EQUAL "8.0")
+		message("Disabling CUDA_USE_STATIC_CUDA_RUNTIME")
+	endif()
+
+	find_package( CUDA REQUIRED ${CUDA_VERSION} )
+endif()
 
 ## C++ flags applied to all builds
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
