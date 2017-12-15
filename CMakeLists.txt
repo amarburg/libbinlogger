@@ -49,14 +49,15 @@ fips_include_directories( ${LIBLOGGER_INCLUDE_DIRS} )
 
 fips_add_subdirectory("lib/")
 
-if( FIPS_UNITTESTS )
-  fips_add_subdirectory( test/unit/ )
-
-  if( FIPS_UNITTESTS_RUN_AFTER_BUILD )
-    ## TODO
-  endif()
-endif()
-
 if( NOT FIPS_IMPORT )
+
+  if( FIPS_UNITTESTS )
+    fips_add_subdirectory( test/unit/ )
+
+    if( FIPS_UNITTESTS_RUN_AFTER_BUILD )
+      ## TODO
+    endif()
+  endif()
+
   fips_finish()
 endif()
