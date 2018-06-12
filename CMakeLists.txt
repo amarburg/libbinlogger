@@ -37,7 +37,6 @@ endif()
 ## C++ flags applied to all builds
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-
 ## Set global include paths
 set( LIBLOGGER_INCLUDE_DIRS
   ${OpenCV_INCLUDE_DIRS}
@@ -53,10 +52,6 @@ if( NOT FIPS_IMPORT )
 
   if( FIPS_UNITTESTS )
     fips_add_subdirectory( test/unit/ )
-
-    if( FIPS_UNITTESTS_RUN_AFTER_BUILD )
-      ## TODO
-    endif()
   endif()
 
   fips_finish()
