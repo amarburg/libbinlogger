@@ -4,8 +4,8 @@ imports:
     libactive_object:
         git: https://github.com/amarburg/libactive_object.git
         branch: fips
-    fips-g3log:
-        git: https://github.com/amarburg/fips-g3log
+    libg3logger:
+        git: https://github.com/amarburg/libg3logger.git
 
 exports:
   header-dirs:
