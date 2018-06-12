@@ -101,7 +101,7 @@ bool LogWriter::close( void )
 
 int LogWriter::newFrame( void )
 {
-	for( unsigned int handle = 0; handle < _fields.size(); ++handle ) {
+	for( Fields::size_type handle = 0; handle < _fields.size(); ++handle ) {
 		_fieldUpdated[handle] = false;
 	}
 	return 0;
@@ -109,7 +109,7 @@ int LogWriter::newFrame( void )
 
 void LogWriter::addField( FieldHandle_t handle, const void *data )
 {
-	CHECK( handle >= 0 && handle < _fields.size() );
+	CHECK( handle >= 0 && handle < (int)_fields.size() );
 
 	{
 		std::lock_guard< std::mutex > lock( _compressorMutex[handle] );
@@ -130,7 +130,7 @@ void LogWriter::addField( FieldHandle_t handle, const void *data )
 
 void LogWriter::addField( FieldHandle_t handle, const cv::Mat &mat )
 {
-	CHECK( handle >= 0 && handle < _fields.size() );
+	CHECK( handle >= 0 && (unsigned long)handle < _fields.size() );
 	CHECK( mat.rows == _fields[handle].size.height && mat.cols == _fields[handle].size.width );
 
 	if( _fields[handle].type == FIELD_DEPTH_32F ) {

@@ -3,21 +3,13 @@ box: amarburg/lsdslam-dev-host:conan-latest
 
 build:
   steps:
-    - install-packages:
-      packages: python-pip
-
     - script:
-      name: Install Conan
-      code: pip install conan
-
-    - script:
-      name: Debug test
+      name: Build
       code: |
-           rake debug:test
-
-    - script:
-      name: Upload to conan.io
-      code: |
-        conan export amarburg/testing
-        conan user -p $CONAN_PASSWORD $CONAN_USERNAME
-        conan upload "liblogger*" --confirm
+          ./fips set config linux-make-unittest
+          ./fips gen
+          echo "~~~~"
+          ls -l /pipeline/libactive_object
+          echo "~~~~"
+          VERBOSE=1 ./fips build
+          ./fips run loggerTest

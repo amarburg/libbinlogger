@@ -3,3 +3,9 @@
 *.so
 .DS_Store
 build[_-]*/
+
+## fips internal directories
+.fips-*
+
+## Werkcer local storage directory
+.wercker/

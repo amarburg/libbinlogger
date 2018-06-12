@@ -25,8 +25,6 @@ enum FieldType_t {
 	FIELD_DEPTH_32F = 1
 };
 
-typedef int FieldHandle_t;
-
 struct Field {
 	Field( const std::string &nm, const cv::Size &sz, FieldType_t tp )
 		: name(nm), size(sz), type(tp)
@@ -70,16 +68,18 @@ struct Field {
 
 };
 typedef std::vector<Field> Fields;
+typedef int FieldHandle_t;
+
 
 struct Chunk {
 	Chunk() = delete;
 
 	Chunk( unsigned long _sz )
-		: size(_sz), _capacity( _sz ), data( new char[_capacity] )
+		: _capacity( _sz ), size(_sz), data( new char[_capacity] )
 	{ memset( data.get(), 0, size );}
 
 	Chunk( const void *_data, unsigned long _sz )
-		: size(_sz), _capacity( _sz ), data( new char[_capacity] )
+		: _capacity( _sz ), size(_sz), data( new char[_capacity] )
 	{ memcpy( data.get(), _data, size );}
 
 	unsigned int set( void *_data, unsigned int _sz )

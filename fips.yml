@@ -1,0 +1,19 @@
+imports:
+    fips-googletest:
+        git: https://github.com/amarburg/fips-googletest.git
+    libactive_object:
+        git: https://github.com/amarburg/libactive_object.git
+        branch: fips
+    libg3logger:
+        git: https://github.com/amarburg/libg3logger.git
+
+exports:
+  header-dirs:
+    - include/
+  modules:
+    logger: .
+
+defines:
+  FIPS_RTTI: ON
+  FIPS_EXCEPTIONS: ON
+  FIPS_UNITTESTS_RUN_AFTER_BUILD: ON
