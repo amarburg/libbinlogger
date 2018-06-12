@@ -3,7 +3,7 @@ if( NOT FIPS_IMPORT)
   get_filename_component(FIPS_ROOT_DIR "../fips" ABSOLUTE)
   include("${FIPS_ROOT_DIR}/cmake/fips.cmake")
 
-  fips_setup(PROJECT liblogger)
+  fips_setup(PROJECT binlogger)
 endif()
 
 find_package(Boost COMPONENTS thread filesystem system REQUIRED)

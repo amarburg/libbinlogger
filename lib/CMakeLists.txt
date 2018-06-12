@@ -7,11 +7,11 @@ set(logger_SOURCE_FILES
 )
 
 # build shared library.
-fips_begin_module(logger)
+fips_begin_module(binlogger)
   fips_files(
     LogReader.cpp
     LogWriter.cpp
   )
   fips_libs( ${Boost_LIBRARIES} ${ZLIB_LIBRARIES} ${OpenCV_LIBS})
-  fips_deps( g3logger active_object )
+  fips_deps( logger active_object )
 fips_end_module()
