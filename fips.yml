@@ -4,14 +4,14 @@ imports:
     libactive_object:
         git: https://github.com/amarburg/libactive_object.git
         branch: fips
-    liblogger:
+    libg3logger:
         git: https://github.com/amarburg/liblogger.git
 
 exports:
   header-dirs:
     - include/
   modules:
-    binlogger: .
+    libbinlogger: .
 
 defines:
   FIPS_RTTI: ON

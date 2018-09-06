@@ -13,5 +13,5 @@ fips_begin_module(binlogger)
     LogWriter.cpp
   )
   fips_libs( ${Boost_LIBRARIES} ${ZLIB_LIBRARIES} ${OpenCV_LIBS})
-  fips_deps( logger active_object )
+  fips_deps( libg3logger active_object )
 fips_end_module()
