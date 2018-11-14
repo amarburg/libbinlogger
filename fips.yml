@@ -1,7 +1,7 @@
 imports:
     fips-googletest:
         git: https://github.com/amarburg/fips-googletest.git
-    libactive_object:
+    libactiveobject:
         git: https://github.com/apl-ocean-engineering/libactiveobject.git
         branch: fips
     libg3logger:
