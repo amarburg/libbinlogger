@@ -3,7 +3,6 @@ imports:
         git: https://github.com/amarburg/fips-googletest.git
     libactiveobject:
         git: https://github.com/apl-ocean-engineering/libactiveobject.git
-        branch: fips
     libg3logger:
         git: https://github.com/apl-ocean-engineering/libg3logger.git
 
